@@ -32,16 +32,20 @@ void sub_timespec(struct timespec t1, struct timespec t2, struct timespec *td)
 int main() {
     int pid = 0, i;
     long long int numberNum = 0;
-    FILE* fp = fopen(inputFile, "r+");
+    FILE* fp = fopen(inputFile, "r");
     while(1){
         int tmp;
-        int eof = fscanf(fp, "%d", &tmp);
+        //int eof = fscanf(fp, "%d", &tmp);
+        char tmpChar[60] = {0, };
+        if(!fgets(tmpChar, 59, fp)){
+            break;
+        }
         numberNum++;
-        if(eof == EOF) break;
+        //if(eof == EOF) break;
     }
     fclose(fp);
     
-    fp = fopen(inputFile, "r+");
+    fp = fopen(inputFile, "r");
     long long int numberPerFile = numberNum / processNum, tmpNum = 0, splitNum = 0;
     long long int modNumber = numberNum % processNum;
     int initFlag = 1;
@@ -59,7 +63,7 @@ int main() {
         int tmp = 0;
         
         char tmpChar[60] = {0, };
-        if(!fgets(tmpChar, 59, tmp)){
+        if(!fgets(tmpChar, 59, fp)){
             break;
         }
         tmp = atoi(tmpChar);
