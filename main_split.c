@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <time.h>
@@ -56,10 +57,13 @@ int main() {
         }
         
         int tmp = 0;
-        int eof = fscanf(fp, "%d", &tmp);
-        if(eof == EOF){
+        
+        char tmpChar[60] = {0, };
+        if(!fgets(tmpChar, 59, tmp)){
             break;
         }
+        tmp = atoi(tmpChar);
+        
         fprintf(splitedFile, "%d\n", tmp);
         //printf("%d\n", tmp);
         
